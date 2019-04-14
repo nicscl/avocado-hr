@@ -10,7 +10,7 @@
 
 function onInstallation(bot, installer) {
     if (installer) {
-        bot.startPrivateConversation({user: installer}, function (err, convo) {
+        bot.startPrivateConversation({ user: installer }, function (err, convo) {
             if (err) {
                 console.log(err);
             } else {
@@ -30,11 +30,11 @@ var config = {};
 if (process.env.MONGOLAB_URI) {
     var BotkitStorage = require('botkit-storage-mongo');
     config = {
-        storage: BotkitStorage({mongoUri: process.env.MONGOLAB_URI}),
+        storage: BotkitStorage({ mongoUri: process.env.MONGOLAB_URI }),
     };
 } else {
     config = {
-        json_file_store: ((process.env.TOKEN)?'./db_slack_bot_ci/':'./db_slack_bot_a/'), //use a different name if an app or CI
+        json_file_store: ((process.env.TOKEN) ? './db_slack_bot_ci/' : './db_slack_bot_a/'), //use a different name if an app or CI
     };
 }
 
@@ -86,6 +86,10 @@ controller.on('bot_channel_join', function (bot, message) {
 });
 
 controller.hears('hello', 'direct_message', function (bot, message) {
+    bot.reply(message, 'Hello!');
+});
+
+controller.hears('oi', 'direct_message', function (bot, message) {
     bot.reply(message, 'Hello!');
 });
 
